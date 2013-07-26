@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>Offline</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.3.js"></script>
+    <script type="text/javascript" src="../no.line.js"></script>
+    <style>
+        .status {
+            font-size: 24px;
+        }
+        .online {
+            color: #0c0;
+        }
+        .offline {
+            color: #ccc;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="status"></div>
+
+<script>
+no.line.init({
+    url: '/examples/index.html',
+    interval: 5000
+});
+
+$(window)
+    .on('no-online no-offline', function(e) {
+        var is_online = (e.type === 'no-online');
+        $('.status')
+            .toggleClass('offline', !is_online)
+            .toggleClass('online', is_online)
+            .text( (is_online) ? 'online' : 'offline' );
+    });
+</script>
+
+</body>
+</html>
+
